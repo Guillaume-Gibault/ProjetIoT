@@ -1,4 +1,4 @@
-from machine import UART, Pin, I2C
+from machine import UART, I2C
 import ustruct
 import time
 
@@ -15,24 +15,8 @@ uart = UART(UART_NUMBER, baudrate=BAUDRATE, timeout=DELAY_TIMEOUT, rxbuf=RX_BUFF
 # Configuration de l'I2C pour le VL53L0X
 i2c = I2C(1)
 
-# VL53L0X Class Simplified (adapted from the provided VL53L0X script)
-class VL53L0X:
-    def __init__(self, i2c, address=0x29):
-        self.i2c = i2c
-        self.address = address
-        self.init_sensor()
-
-    def init_sensor(self):
-        self._write_register(0x00, 0x01)  # Example: Initialization (actual register may differ)
-
-    def _write_register(self, reg, value):
-        self.i2c.writeto_mem(self.address, reg, ustruct.pack('B', value))
-
-    def get_distance(self):
-        self._write_register(0x00, 0x01)  # Example: Trigger measurement
-        time.sleep_ms(10)
-        data = self.i2c.readfrom_mem(self.address, 0x14, 2)  # Example: Read result
-        return ustruct.unpack('>H', data)[0]
+# Importation de la classe VL53L0X complète
+from VL53L0X import VL53L0X  # Assurez-vous que ce fichier est dans le bon répertoire
 
 # Initialisation du capteur VL53L0X
 tof = VL53L0X(i2c)
@@ -71,7 +55,7 @@ print("Prêt à envoyer des messages.")
 
 while True:
     try:
-        distance = tof.get_distance()  # Mesurer la distance
+        distance = tof.read()  # Obtenez la distance en utilisant la méthode `read` de la classe complète
         print("Distance mesurée :", distance, "mm")
         send_lora_message(distance)  # Envoyer la distance via LoRa
         time.sleep_ms(100)  # Pause entre les envois
