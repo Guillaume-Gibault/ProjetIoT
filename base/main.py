@@ -1,30 +1,30 @@
 from machine import UART, Pin
-import ubinascii
 import time
+import re  # Pour utiliser des expressions régulières
 
 # Définition des broches
-A0=Pin.cpu.C0
-A1=Pin.cpu.C1
-A2=Pin.cpu.A1
-A3=Pin.cpu.A0
-A4=Pin.cpu.A4
-A5=Pin.cpu.A5
-D0=Pin.cpu.A3
-D1=Pin.cpu.A2
-D2=Pin.cpu.C6
-D3=Pin.cpu.A10
-D4=Pin.cpu.C10
-D5=Pin.cpu.A15
-D6=Pin.cpu.A8
-D7=Pin.cpu.C13
-D8=Pin.cpu.C12
-D9=Pin.cpu.A9
-D10=Pin.cpu.A4
-D11=Pin.cpu.A7
-D12=Pin.cpu.A6
-D13=Pin.cpu.A5
-D14=Pin.cpu.B9
-D15=Pin.cpu.B8
+A0 = Pin.cpu.C0
+A1 = Pin.cpu.C1
+A2 = Pin.cpu.A1
+A3 = Pin.cpu.A0
+A4 = Pin.cpu.A4
+A5 = Pin.cpu.A5
+D0 = Pin.cpu.A3
+D1 = Pin.cpu.A2
+D2 = Pin.cpu.C6
+D3 = Pin.cpu.A10
+D4 = Pin.cpu.C10
+D5 = Pin.cpu.A15
+D6 = Pin.cpu.A8
+D7 = Pin.cpu.C13
+D8 = Pin.cpu.C12
+D9 = Pin.cpu.A9
+D10 = Pin.cpu.A4
+D11 = Pin.cpu.A7
+D12 = Pin.cpu.A6
+D13 = Pin.cpu.A5
+D14 = Pin.cpu.B9
+D15 = Pin.cpu.B8
 
 # Constantes pour l'UART
 DELAY_TIMEOUT = 1000
@@ -84,19 +84,25 @@ send_command("AT+TEST=RXLRPKT")
 while True:
     try:
         message = receive_message()
-        if "RX" in message:
+        if message and "RX" in message:
             try:
                 print("Message brut reçu :", message)
-                splitted_message = message.split('"')
-                distance = int(ubinascii.unhexlify(splitted_message[1]))
-                print("Distance reçue :", distance, "mm")
+                # Utilisation d'une expression régulière pour extraire les données hexadécimales
+                match = re.search(r'RX\s+"([0-9A-Fa-f]+)"', message)
+                if match:
+                    data = match.group(1)  # Extraction de la chaîne hexadécimale
+                    print(data)
+                    distance = int(data)
+                    print("Distance reçue :", distance, "mm")
 
-                if distance > DISTANCE_THRESHOLD:  # Seuil de distance
-                    output_pin.value(1)
-                    print("Seuil dépassé : activation.")
+                    if distance > DISTANCE_THRESHOLD:  # Seuil de distance
+                        output_pin.value(1)
+                        print("Seuil dépassé : activation.")
+                    else:
+                        output_pin.value(0)
+                        print("Seuil non dépassé : désactivation.")
                 else:
-                    output_pin.value(0)
-                    print("Seuil non dépassé : désactivation.")
+                    print("Données non valides dans le message.")
             except (ValueError, TypeError) as e:
                 print("Erreur dans le traitement :", e)
     except KeyboardInterrupt:
