@@ -1,5 +1,4 @@
 from machine import UART, I2C
-import ustruct
 import time
 
 # Constantes pour l'UART
@@ -36,11 +35,6 @@ def send_command(cmd, expected_response="OK", timeout=2000):
     print("Erreur ou timeout :", response.decode("utf-8") if response else "Aucune réponse")
     return False
 
-# Envoi des données via LoRa
-def send_lora_message(data):
-    hex_data = "{:04x}".format(data)  # Convertir la distance en hexadécimal
-    send_command('AT+TEST=TXLRSTR, "' + hex_data + '"', expected_response="Done")
-
 # Programme principal
 send_command("AT+RESET")  # Réinitialiser le module LoRa
 time.sleep(2)  # Attendre que le module redémarre
@@ -53,7 +47,7 @@ while True:
     try:
         distance = tof.read()  # Obtenez la distance en utilisant la méthode `read` de la classe complète
         print("Distance mesurée :", distance, "mm")
-        send_lora_message(distance)  # Envoyer la distance via LoRa
+        send_command('AT+TEST=TXLRPKT, ' + str(distance), expected_response="Done")
         time.sleep_ms(100)  # Pause entre les envois
     except KeyboardInterrupt:
         print("Arrêt du programme.")
