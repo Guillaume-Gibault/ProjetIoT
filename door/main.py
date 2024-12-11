@@ -36,18 +36,18 @@ def send_command(cmd, expected_response="OK", timeout=2000):
     return False
 
 # Programme principal
-send_command("AT+RESET")  # Réinitialiser le module LoRa
+send_command("AT+RESET", expected_response="+RESET: OK")  # Réinitialiser le module LoRa
 time.sleep(2)  # Attendre que le module redémarre
-send_command("AT")  # Vérifier la connexion
-send_command("AT+VER")  # Obtenir la version du firmware
-send_command("AT+MODE=TEST")  # Changer en mode test
-print("Initialisation terminée.")
+send_command("AT", expected_response="+AT: OK")  # Vérifier la connexion
+send_command("AT+VER", expected_response="+VER:")  # Obtenir la version du firmware
+send_command("AT+MODE=TEST", expected_response="+MODE: TEST")  # Changer en mode test
+print("Initialisation terminée.\n\n")
 
 while True:
     try:
         distance = tof.read()  # Obtenez la distance en utilisant la méthode `read` de la classe complète
         print("Distance mesurée :", distance, "mm")
-        send_command('AT+TEST=TXLRPKT, ' + str(distance), expected_response="Done")
+        send_command('AT+TEST=TXLRPKT, ' + str(distance), expected_response='+TEST: TXLRPKT "')
         time.sleep_ms(100)  # Pause entre les envois
     except KeyboardInterrupt:
         print("Arrêt du programme.")
