@@ -15,9 +15,9 @@ uart = UART(UART_NUMBER, baudrate=BAUDRATE, timeout=DELAY_TIMEOUT, rxbuf=RX_BUFF
 i2c = I2C(1)
 
 # Importation de la classe VL53L0X complète
-from VL53L0X import VL53L0X  # Assurez-vous que ce fichier est dans le bon répertoire
+from VL53L0X import VL53L0X
 
-# Initialisation du capteur VL53L0X
+# Initialisation du capteur tof VL53L0X
 tof = VL53L0X(i2c)
 
 # Fonction pour envoyer des commandes AT à LoRa
@@ -36,16 +36,15 @@ def send_command(cmd, expected_response="OK", timeout=2000):
     return False
 
 # Programme principal
-send_command("AT+RESET", expected_response="+RESET: OK")  # Réinitialiser le module LoRa
-time.sleep(2)  # Attendre que le module redémarre
-send_command("AT", expected_response="+AT: OK")  # Vérifier la connexion
+send_command("AT+RESET", expected_response="+RESET: OK")  # Reset LoRa
+send_command("AT", expected_response="+AT: OK")  # Vérifier la communication
 send_command("AT+VER", expected_response="+VER:")  # Obtenir la version du firmware
-send_command("AT+MODE=TEST", expected_response="+MODE: TEST")  # Changer en mode test
+send_command("AT+MODE=TEST", expected_response="+MODE: TEST")  # Changer en mode P2P
 print("Initialisation terminée.\n\n")
 
 while True:
     try:
-        distance = tof.read()  # Obtenez la distance en utilisant la méthode `read` de la classe complète
+        distance = tof.read()
         print("Distance mesurée :", distance, "mm")
         send_command('AT+TEST=TXLRPKT, ' + str(distance), expected_response='+TEST: TXLRPKT "')
         time.sleep_ms(100)  # Pause entre les envois
