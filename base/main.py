@@ -1,6 +1,7 @@
+# Imports
 from machine import UART, Pin
 import time
-import re  # Pour utiliser des expressions régulières
+import re
 
 # Définition des broches
 A0 = Pin.cpu.C0
@@ -61,9 +62,9 @@ def send_command(cmd, expected_response="OK", timeout=2000):
 # Fonction pour lire les messages reçus via UART
 def receive_message():
     if uart.any():
-        data = uart.read()
+        msg = uart.read()
         try:
-            msg = data.decode("utf-8").strip()
+            msg = msg.decode("utf-8").strip()
             print("Message reçu :", msg)
             return msg
         except UnicodeDecodeError:
@@ -71,31 +72,27 @@ def receive_message():
             return None
     return None
 
-# Boucle principale
-send_command("AT+RESET")
-time.sleep(2)
-send_command("AT")
-send_command("AT+VER")
-send_command("AT+MODE=TEST")
-print("initialisation terminee")
-
-send_command("AT+TEST=RXLRPKT")
-
+# Programme principal
+send_command("AT+RESET", expected_response="+RESET: OK")  # Reset LoRa
+time.sleep(2)  # Pause pour laisser le temps au module de redémarrer
+send_command("AT", expected_response="+AT: OK")  # Vérifier la communication
+send_command("AT+VER", expected_response="+VER:")  # Obtenir la version du firmware
+send_command("AT+MODE=TEST", expected_response="+MODE: TEST")  # Changer en mode P2P
+print("Initialisation terminée.\n\n")
+send_command("AT+TEST=RXLRPKT", expected_response="")  # Activer la réception continue
 while True:
     try:
         message = receive_message()
         if message and "RX" in message:
             try:
                 print("Message brut reçu :", message)
-                # Utilisation d'une expression régulière pour extraire les données hexadécimales
                 match = re.search(r'RX\s+"([0-9A-Fa-f]+)"', message)
                 if match:
-                    data = match.group(1)  # Extraction de la chaîne hexadécimale
+                    data = match.group(1)
                     print(data)
                     distance = int(data)
                     print("Distance reçue :", distance, "mm")
-
-                    if distance > DISTANCE_THRESHOLD:  # Seuil de distance
+                    if distance > DISTANCE_THRESHOLD:
                         output_pin.value(1)
                         print("Seuil dépassé : activation.")
                     else:
