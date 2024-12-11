@@ -36,22 +36,18 @@ def send_command(cmd, expected_response="OK", timeout=2000):
     print("Erreur ou timeout :", response.decode("utf-8") if response else "Aucune réponse")
     return False
 
-# Configuration du module LoRa
-def config_lora():
-    send_command("AT+MODE=TEST")
-    send_command("AT+DR=SF12BW125")
-    send_command("AT+FREQ=868125000")
-    send_command("AT+POWER=22")
-
 # Envoi des données via LoRa
 def send_lora_message(data):
     hex_data = "{:04x}".format(data)  # Convertir la distance en hexadécimal
-    send_command("AT+MSGHEX=" + hex_data, expected_response="Done")
+    send_command('AT+TEST=TXLRSTR, "' + hex_data + '"', expected_response="Done")
 
 # Programme principal
-print("Configuration LoRa...")
-config_lora()
-print("Prêt à envoyer des messages.")
+send_command("AT+RESET")  # Réinitialiser le module LoRa
+time.sleep(2)  # Attendre que le module redémarre
+send_command("AT")  # Vérifier la connexion
+send_command("AT+VER")  # Obtenir la version du firmware
+send_command("AT+MODE=TEST")  # Changer en mode test
+print("Initialisation terminée.")
 
 while True:
     try:
