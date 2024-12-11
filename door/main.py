@@ -37,6 +37,7 @@ def send_command(cmd, expected_response="OK", timeout=2000):
 
 # Programme principal
 send_command("AT+RESET", expected_response="+RESET: OK")  # Reset LoRa
+time.sleep(2)  # Pause pour laisser le temps au module de redémarrer
 send_command("AT", expected_response="+AT: OK")  # Vérifier la communication
 send_command("AT+VER", expected_response="+VER:")  # Obtenir la version du firmware
 send_command("AT+MODE=TEST", expected_response="+MODE: TEST")  # Changer en mode P2P
