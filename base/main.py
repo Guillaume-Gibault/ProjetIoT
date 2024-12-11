@@ -85,19 +85,17 @@ while True:
         message = receive_message()
         if message and "RX" in message:
             try:
-                print("Message brut reçu :", message)
                 match = re.search(r'RX\s+"([0-9A-Fa-f]+)"', message)
                 if match:
                     data = match.group(1)
-                    print(data)
                     distance = int(data)
                     print("Distance reçue :", distance, "mm")
                     if distance > DISTANCE_THRESHOLD:
                         output_pin.value(1)
-                        print("Seuil dépassé : activation.")
+                        print("Seuil dépassé : activation.", end="\n\n")
                     else:
                         output_pin.value(0)
-                        print("Seuil non dépassé : désactivation.")
+                        print("Seuil non dépassé : désactivation.", end="\n\n")
                 else:
                     print("Données non valides dans le message.")
             except (ValueError, TypeError) as e:
