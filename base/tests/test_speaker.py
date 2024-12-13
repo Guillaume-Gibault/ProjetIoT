@@ -3,7 +3,6 @@
 # Cet exemple fait la démonstration de l'usage de la PWM pour la broche D6 sur laquelle est
 # branché le buzzer/speaker.
 import time
-
 import pyb
 
 # Liste des fréquences des notes qui seront jouées par le buzzer/speaker
