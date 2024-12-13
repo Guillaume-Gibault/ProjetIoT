@@ -2,6 +2,7 @@
 # Jouer un jingle sur un buzzer/speaker (Grove ou autre).
 # Cet exemple fait la démonstration de l'usage de la PWM pour la broche D6 sur laquelle est
 # branché le buzzer/speaker.
+import time
 
 import pyb
 
@@ -15,6 +16,15 @@ percent = [5, 7, 9, 11, 13, 15, 17, 19]
 # D6 génère une PWM avec TIM1, CH1
 d6 = pyb.Pin('D6', pyb.Pin.OUT_PP)
 
+# Premier test de la génération PWM
+tim1 = pyb.Timer(1, freq=262)
+pwm = tim1.channel(1, pyb.Timer.PWM, pin=d6)
+pwm.pulse_width_percent(5)
+time.sleep(2)
+pwm.pulse_width_percent(0)
+tim1.deinit()
+
+# Deuxième test de la génération PWM
 # Gestion d'erreurs, pour s'assurer que le buzzer/speaker sera éteint correctement si l'utilisateur
 # interromp le script avec *[CTRL]-[C]*.
 try:
