@@ -17,16 +17,19 @@ percent = [5, 7, 9, 11, 13, 15, 17, 19]
 d6 = pyb.Pin('D6', pyb.Pin.OUT_PP)
 
 # Premier test de la génération PWM
+print("Premier test de la génération PWM")
 tim1 = pyb.Timer(1, freq=262)
 pwm = tim1.channel(1, pyb.Timer.PWM, pin=d6)
 pwm.pulse_width_percent(5)
 time.sleep(2)
 pwm.pulse_width_percent(0)
 tim1.deinit()
+print("Fin du premier test de la génération PWM")
 
 # Deuxième test de la génération PWM
 # Gestion d'erreurs, pour s'assurer que le buzzer/speaker sera éteint correctement si l'utilisateur
 # interromp le script avec *[CTRL]-[C]*.
+print("Deuxième test de la génération PWM")
 try:
     while True:
         # Itération entre 0 et 7
@@ -36,7 +39,6 @@ try:
             pwm = tim1.channel(1, pyb.Timer.PWM, pin=d6)
             # Rapport cyclique
             pwm.pulse_width_percent(percent[i])
-
 # En cas d'interruption clavier avec *[CTRL]-[C]*
 except KeyboardInterrupt:
     pwm.pulse_width_percent(0)  # Arrêt de la génération PWM
