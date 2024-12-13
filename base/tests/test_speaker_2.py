@@ -2,7 +2,7 @@ import time
 import pyb
 
 # Configuration de la broche SIG en sortie PWM
-speaker = pyb.timer.PWM(pyb.Pin(15))  # Remplacez 15 par le numéro de votre broche
+speaker = pyb.timer.PWM(pyb.Pin('D6', pyb.Pin.OUT_PP))  # Remplacez 15 par le numéro de votre broche
 speaker.duty_u16(32768)  # Volume (50% duty cycle)
 
 # Durées des notes
