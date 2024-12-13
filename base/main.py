@@ -95,14 +95,14 @@ pwm.pulse_width_percent(0)  # Initialisation
 output_pin.value(0)  # Initialisation
 while True:
     try:
-        message = receive_message()
-        if message and "RX" in message:  # Handler pour les messages reçus
-            try:
-                match = re.search(r'RX\s+"([0-9A-Fa-f]+)"', message)
-                if match:
-                    data = match.group(1)
-                    activation = bool(int(data))
-                    if not triggered:
+        if not triggered:  # Handler pour la réception de messages
+            message = receive_message()
+            if message and "RX" in message:  # Handler pour les messages reçus
+                try:
+                    match = re.search(r'RX\s+"([0-9A-Fa-f]+)"', message)
+                    if match:
+                        data = match.group(1)
+                        activation = bool(int(data))
                         if activation:
                             pwm.pulse_width_percent(15)
                             output_pin.value(1)
@@ -112,20 +112,21 @@ while True:
                             pwm.pulse_width_percent(0)
                             output_pin.value(0)
                             print("Porte fermée.", end="\n\n")
-                else:
-                    print("Données non valides dans le message.")
-            except (ValueError, TypeError) as e:
-                print("Erreur dans le traitement :", e)
-        if triggered and input_pin_valid_code.value() == 1:  # Handler pour la désactivation de l'alarme
-            pwm.pulse_width_percent(0)
-            output_pin.value(0)
-            triggered = False
-            print("Bon code. Désactivation...", end="\n\n")
-        if triggered and input_pin_invalid_code.value() == 1:  # Handler pour la non-désactivation de l'alarme
-            pwm.pulse_width_percent(15)
-            output_pin.value(1)
-            # Placeholder pour l'envoi d'un message d'alerte
-            print("Mauvais code. Continuation de l'alarme...", end="\n\n")
+                    else:
+                        print("Données non valides dans le message.")
+                except (ValueError, TypeError) as e:
+                    print("Erreur dans le traitement :", e)
+        else:
+            if input_pin_valid_code.value() == 1:  # Handler pour la désactivation de l'alarme
+                pwm.pulse_width_percent(0)
+                output_pin.value(0)
+                triggered = False
+                print("Bon code. Désactivation...", end="\n\n")
+            if input_pin_invalid_code.value() == 1:  # Handler pour la non-désactivation de l'alarme
+                pwm.pulse_width_percent(15)
+                output_pin.value(1)
+                # Placeholder pour l'envoi d'un message d'alerte
+                print("Mauvais code. Continuation de l'alarme...", end="\n\n")
     except KeyboardInterrupt:
         print("Arrêt du programme.")
         break
