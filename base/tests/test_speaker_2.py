@@ -65,7 +65,10 @@ def play_tone(note, duration):
 
 print("Lecture de la mélodie.")
 try:
-    for note, duration in [MELODY_1, MELODY_2]:
+    for note, duration in MELODY_1:
+        play_tone(note, duration)
+        time.sleep(SHORT_PAUSE)
+    for note, duration in MELODY_2:
         play_tone(note, duration)
         time.sleep(SHORT_PAUSE)
 except KeyboardInterrupt:
