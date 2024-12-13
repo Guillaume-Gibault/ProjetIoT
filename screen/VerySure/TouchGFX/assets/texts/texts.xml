@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="texts.xsd" Version="4.24.1">
+  <Languages>
+    <Language Id="GB" />
+  </Languages>
+  <Texts>
+    <TextGroup Id="Group1" />
+    <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_24O2" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="passwordBuffer" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">Entrez le Mdp&#10;</Translation>
+      </Text>
+      <Text Id="__SingleUse_TTIZ" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;d&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_SC9F" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">W</Translation>
+      </Text>
+      <Text Id="__SingleUse_7O5C" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">X</Translation>
+      </Text>
+      <Text Id="__SingleUse_CQ2J" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">C</Translation>
+      </Text>
+      <Text Id="__SingleUse_M1OY" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">V</Translation>
+      </Text>
+      <Text Id="__SingleUse_FURS" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">B</Translation>
+      </Text>
+      <Text Id="__SingleUse_QYCF" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">N</Translation>
+      </Text>
+      <Text Id="__SingleUse_74JU" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">Q</Translation>
+      </Text>
+      <Text Id="__SingleUse_ECDU" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">S</Translation>
+      </Text>
+      <Text Id="__SingleUse_F18U" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">D</Translation>
+      </Text>
+      <Text Id="__SingleUse_951V" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">F</Translation>
+      </Text>
+      <Text Id="__SingleUse_73XS" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">G</Translation>
+      </Text>
+      <Text Id="__SingleUse_7SMN" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">H</Translation>
+      </Text>
+      <Text Id="__SingleUse_I8HZ" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">J</Translation>
+      </Text>
+      <Text Id="__SingleUse_7O1B" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">K</Translation>
+      </Text>
+      <Text Id="__SingleUse_KGVE" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">L</Translation>
+      </Text>
+      <Text Id="__SingleUse_NAOF" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">M</Translation>
+      </Text>
+      <Text Id="__SingleUse_1LBV" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">P</Translation>
+      </Text>
+      <Text Id="__SingleUse_WDHH" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">O</Translation>
+      </Text>
+      <Text Id="__SingleUse_8VYU" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">I</Translation>
+      </Text>
+      <Text Id="__SingleUse_GNXQ" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">U</Translation>
+      </Text>
+      <Text Id="__SingleUse_F1JP" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">Y</Translation>
+      </Text>
+      <Text Id="__SingleUse_00MF" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">T</Translation>
+      </Text>
+      <Text Id="__SingleUse_E6PN" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">R</Translation>
+      </Text>
+      <Text Id="__SingleUse_KJMU" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">E</Translation>
+      </Text>
+      <Text Id="__SingleUse_YR9K" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">Z</Translation>
+      </Text>
+      <Text Id="__SingleUse_24TV" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">A</Translation>
+      </Text>
+    </TextGroup>
+  </Texts>
+  <Typographies>
+    <Typography Id="Default" Font="verdana.ttf" Size="20" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="Large" Font="verdana.ttf" Size="40" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="Small" Font="verdana.ttf" Size="10" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
+  </Typographies>
+</TextDatabase>

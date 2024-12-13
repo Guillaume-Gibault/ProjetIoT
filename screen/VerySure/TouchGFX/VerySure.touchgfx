@@ -1,0 +1,1086 @@
+{
+  "Application": {
+    "Screens": [
+      {
+        "Name": "Main",
+        "Components": [
+          {
+            "Type": "Container",
+            "Name": "passwordBox",
+            "Width": 480,
+            "Height": 136,
+            "Components": [
+              {
+                "Type": "Image",
+                "Name": "passwordBar",
+                "X": 60,
+                "Y": 72,
+                "Width": 360,
+                "Height": 43,
+                "RelativeFilename": "password-bar.png"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "passwordText",
+                "X": 163,
+                "Y": 78,
+                "Width": 154,
+                "Height": 30,
+                "TextId": "__SingleUse_TTIZ",
+                "TextRotation": "0",
+                "Wildcard1": {
+                  "TextId": "passwordBuffer",
+                  "UseBuffer": true,
+                  "BufferSize": 20
+                }
+              }
+            ]
+          },
+          {
+            "Type": "Container",
+            "Name": "keypadButtons",
+            "Y": 136,
+            "Width": 480,
+            "Height": 122,
+            "Components": [
+              {
+                "Type": "Button",
+                "Name": "letterN",
+                "X": 340,
+                "Y": 86,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterB",
+                "X": 293,
+                "Y": 86,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterV",
+                "X": 246,
+                "Y": 86,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterC",
+                "X": 199,
+                "Y": 86,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterX",
+                "X": 152,
+                "Y": 86,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterW",
+                "X": 105,
+                "Y": 86,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "butttonSuppr",
+                "X": 11,
+                "Y": 86,
+                "Width": 78,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "buttonSuppr.png",
+                "Released": "buttonSuppr.png"
+              },
+              {
+                "Type": "Button",
+                "Name": "buttonOk",
+                "X": 398,
+                "Y": 86,
+                "Width": 60,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "buttonOk.png",
+                "Released": "buttonOk.png"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterM",
+                "X": 434,
+                "Y": 43,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterL",
+                "X": 387,
+                "Y": 43,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterK",
+                "X": 340,
+                "Y": 43,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterJ",
+                "X": 293,
+                "Y": 43,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterH",
+                "X": 246,
+                "Y": 43,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterA",
+                "X": 11,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterZ",
+                "X": 58,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterE",
+                "X": 105,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterR",
+                "X": 152,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterT",
+                "X": 199,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterY",
+                "X": 246,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterU",
+                "X": 293,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterI",
+                "X": 340,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterO",
+                "X": 387,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterP",
+                "X": 434,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterQ",
+                "X": 11,
+                "Y": 43,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterS",
+                "X": 58,
+                "Y": 43,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterD",
+                "X": 105,
+                "Y": 43,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterF",
+                "X": 152,
+                "Y": 43,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "letterG",
+                "X": 199,
+                "Y": 43,
+                "Width": 36,
+                "Height": 36,
+                "LockPosition": true,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_active.png",
+                "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_active.json"
+              }
+            ]
+          },
+          {
+            "Type": "Container",
+            "Name": "keypadLetters",
+            "Y": 136,
+            "Width": 480,
+            "Height": 122,
+            "Components": [
+              {
+                "Type": "TextArea",
+                "Name": "A",
+                "X": 22,
+                "Y": 8,
+                "Width": 14,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_24TV",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "Z",
+                "X": 69,
+                "Y": 8,
+                "Width": 14,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_YR9K",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "E",
+                "X": 116,
+                "Y": 8,
+                "Width": 13,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_KJMU",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "R",
+                "X": 163,
+                "Y": 8,
+                "Width": 14,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_E6PN",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "T",
+                "X": 211,
+                "Y": 8,
+                "Width": 12,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_00MF",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "Y",
+                "X": 258,
+                "Y": 8,
+                "Width": 12,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_F1JP",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "U",
+                "X": 304,
+                "Y": 8,
+                "Width": 15,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_GNXQ",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "I",
+                "X": 354,
+                "Y": 8,
+                "Width": 8,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_8VYU",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "O",
+                "X": 397,
+                "Y": 8,
+                "Width": 16,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_WDHH",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "P",
+                "X": 446,
+                "Y": 8,
+                "Width": 12,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_1LBV",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "Q",
+                "X": 21,
+                "Y": 51,
+                "Width": 16,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_74JU",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "S",
+                "X": 69,
+                "Y": 51,
+                "Width": 14,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_ECDU",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "D",
+                "X": 116,
+                "Y": 51,
+                "Width": 15,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_F18U",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "F",
+                "X": 163,
+                "Y": 51,
+                "Width": 12,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_951V",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "G",
+                "X": 210,
+                "Y": 51,
+                "Width": 16,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_73XS",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "H",
+                "X": 257,
+                "Y": 51,
+                "Width": 15,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_7SMN",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "J",
+                "X": 307,
+                "Y": 51,
+                "Width": 9,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_I8HZ",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "K",
+                "X": 351,
+                "Y": 51,
+                "Width": 14,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_7O1B",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "L",
+                "X": 400,
+                "Y": 49,
+                "Width": 11,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_KGVE",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "M",
+                "X": 444,
+                "Y": 49,
+                "Width": 17,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_NAOF",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "W",
+                "X": 113,
+                "Y": 92,
+                "Width": 20,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_SC9F",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "X",
+                "X": 163,
+                "Y": 92,
+                "Width": 14,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_7O5C",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "C",
+                "X": 210,
+                "Y": 92,
+                "Width": 14,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_CQ2J",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "V",
+                "X": 257,
+                "Y": 92,
+                "Width": 14,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_M1OY",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "B",
+                "X": 304,
+                "Y": 92,
+                "Width": 14,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_FURS",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "N",
+                "X": 351,
+                "Y": 92,
+                "Width": 15,
+                "Height": 24,
+                "LockPosition": true,
+                "TextId": "__SingleUse_QYCF",
+                "TextRotation": "0",
+                "AutoSize": true
+              }
+            ]
+          },
+          {
+            "Type": "TextArea",
+            "Name": "feedbackText",
+            "X": 146,
+            "Y": 14,
+            "Width": 188,
+            "Height": 24,
+            "TextId": "__SingleUse_24O2",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "UseBuffer": true,
+              "BufferSize": 20
+            }
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "buttonClicked_N",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterN"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_N"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_B",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterB"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_B"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_V",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterV"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_V"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_C",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterC"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_C"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_X",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterX"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_X"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_W",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterW"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_W"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_M",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterM"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_M"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_L",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterL"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_L"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_K",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterK"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_K"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_J",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterJ"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_J"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_H",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterH"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_H"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_A",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterA"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_A"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_G",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterG"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_G"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_F",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterF"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_F"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_D",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterD"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_D"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_S",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterS"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_S"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_Q",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterQ"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_Q"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_P",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterP"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_P"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_O",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterO"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_O"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_I",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterI"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_I"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_U",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterU"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_U"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_Y",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterY"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_Y"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_T",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterT"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_T"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_R",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterR"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_R"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_E",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterE"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_E"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_Z",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "letterZ"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_Z"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_Ok",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "buttonOk"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_Ok"
+            }
+          },
+          {
+            "InteractionName": "buttonClicked_Suppr",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "butttonSuppr"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "buttonClicked_Suppr"
+            }
+          }
+        ]
+      }
+    ],
+    "CustomContainerDefinitions": [],
+    "Name": "VerySure",
+    "Resolution": {
+      "Width": 480,
+      "Height": 272
+    },
+    "SelectedColorDepth": 16,
+    "StartupScreenName": "Main",
+    "SelectedStartupLanguage": "GB",
+    "TouchGfxPath": "../Middlewares/ST/touchgfx",
+    "UIPath": ".",
+    "AvailableColorDepths": [
+      16
+    ],
+    "AvailableLCDs": {
+      "16": "LCD16bpp"
+    },
+    "AvailableSections": [
+      "ExtFlashSection",
+      "IntFlashSection"
+    ],
+    "AvailableResolutions": [
+      {
+        "Width": 480,
+        "Height": 272
+      }
+    ],
+    "PhysicalButtons": [],
+    "FrameworkFeatures": {
+      "LCD16bpp": {
+        "Id": "LCD16bpp",
+        "IsEnabled": true
+      }
+    },
+    "GenerateAssetsCommand": "make -f simulator/gcc/Makefile assets -j8",
+    "PostGenerateCommand": "touchgfx update_project --project-file=simulator/msvs/Application.vcxproj",
+    "PostGenerateTargetCommand": "touchgfx update_project",
+    "CompileSimulatorCommand": "make -f simulator/gcc/Makefile -j8",
+    "RunSimulatorCommand": "build\\bin\\simulator.exe",
+    "CompileTargetCommand": "make -f ../gcc/Makefile -j8",
+    "FlashTargetCommand": "make -f ../gcc/Makefile flash -j8",
+    "FlashTargetIntCommandOverride": "make -f ../gcc/Makefile intflash -j8",
+    "LandscapeSkinX": 0,
+    "LandscapeSkinY": 0,
+    "PortraitSkinX": 0,
+    "PortraitSkinY": 0,
+    "DisplayOrientation": "Landscape",
+    "Family": "STM32F7",
+    "SubFamily": "STM32F7x6",
+    "Toolchain": "STM32CubeIDE",
+    "Platform": "m7",
+    "ProjectFile": "../STM32F746G_DISCO.ioc",
+    "OptionalComponentsRoot": "../Middlewares/ST/touchgfx_components",
+    "OptionalComponents": [],
+    "AdditionalFeatures": [
+      "CWRVector",
+      "VectorFonts",
+      "Video"
+    ]
+  },
+  "Version": "4.24.1",
+  "CreatedBy": "4.24.1"
+}
