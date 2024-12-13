@@ -20,12 +20,11 @@ SHORT_PAUSE = 0.05   # Pause courte entre les notes
 
 # Partition simplifiée de "Funky Town"
 MELODY = [
-    ('C4', NOTE_DURATION), ('D4', NOTE_DURATION), ('E4', NOTE_DURATION), ('G4', NOTE_DURATION),
-    ('G4', NOTE_DURATION), ('A4', NOTE_DURATION), ('G4', NOTE_DURATION), ('E4', NOTE_DURATION),
-    ('C4', NOTE_DURATION), ('D4', NOTE_DURATION), ('E4', NOTE_DURATION), ('C4', NOTE_DURATION),
-    ('REST', SHORT_PAUSE),
-    ('C4', NOTE_DURATION), ('D4', NOTE_DURATION), ('E4', NOTE_DURATION), ('G4', NOTE_DURATION),
-    ('A4', NOTE_DURATION), ('G4', NOTE_DURATION), ('E4', NOTE_DURATION), ('C4', NOTE_DURATION),
+    ('G4', 0.1), ('REST', 0.05), ('G4', 0.1), ('REST', 0.05),
+    ('G4', 0.1), ('F4', 0.1), ('REST', 0.05), ('G4', 0.3),
+    ('REST', 0.05), ('D4', 0.3), ('REST', 0.05), ('D4', 0.1),
+    ('REST', 0.05), ('G4', 0.1), ('REST', 0.05), ('C5', 0.1),
+    ('REST', 0.05), ('B4', 0.1), ('REST', 0.05), ('G4', 0.2)
 ]
 
 # Configuration de la broche D6 pour la sortie PWM
