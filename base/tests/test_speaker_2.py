@@ -11,7 +11,7 @@ NOTES = {
     'A4': 440,
     'B4': 494,
     'C5': 523,
-    'REST': 0  # Silence
+    'REST': 20  # Silence
 }
 
 # Durées des notes
