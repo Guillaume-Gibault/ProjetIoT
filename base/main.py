@@ -91,7 +91,7 @@ while True:
                         print("Porte ouverte. Activation...", end="\n\n")
                     else:
                         output_pin.value(0)
-                        print("Porte fermée. Activation...", end="\n\n")
+                        print("Porte fermée. Désactivation...", end="\n\n")
                 else:
                     print("Données non valides dans le message.")
             except (ValueError, TypeError) as e:
