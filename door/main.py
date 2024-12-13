@@ -9,6 +9,9 @@ UART_NUMBER = 2
 RX_BUFF = 512
 EOL = "\r\n"
 
+# Seuil de distance (en mm)
+DISTANCE_THRESHOLD = 500
+
 # Configuration de l'UART pour LoRa
 uart = UART(UART_NUMBER, baudrate=BAUDRATE, timeout=DELAY_TIMEOUT, rxbuf=RX_BUFF)
 
@@ -48,7 +51,12 @@ while True:
     try:
         distance = tof.read()
         print("Distance mesurée :", distance, "mm")
-        send_command('AT+TEST=TXLRPKT, ' + str(distance), expected_response='+TEST: TXLRPKT "')
+        if distance < DISTANCE_THRESHOLD:
+            print("Porte ouverte.")
+            send_command('AT+TEST=TXLRPKT, "1"', expected_response='+TEST: TXLRPKT "')
+        else:
+            print("Porte fermée.")
+            send_command('AT+TEST=TXLRPKT, "0"', expected_response='+TEST: TXLRPKT "')
         time.sleep_ms(100)  # Pause entre les envois
     except KeyboardInterrupt:
         print("Arrêt du programme.")

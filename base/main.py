@@ -34,9 +34,6 @@ UART_NUMBER = 2
 RX_BUFF = 512
 EOL = "\r\n"
 
-# Seuil de distance (en mm)
-DISTANCE_THRESHOLD = 500
-
 # Pin de sortie pour signalisation
 output_pin = Pin(D0, Pin.OUT)
 output_pin.value(0)
@@ -88,14 +85,13 @@ while True:
                 match = re.search(r'RX\s+"([0-9A-Fa-f]+)"', message)
                 if match:
                     data = match.group(1)
-                    distance = int(data)
-                    print("Distance reçue :", distance, "mm")
-                    if distance > DISTANCE_THRESHOLD:
+                    activation = bool(int(data))
+                    if activation:
                         output_pin.value(1)
-                        print("Seuil dépassé : activation.", end="\n\n")
+                        print("Porte ouverte. Activation...", end="\n\n")
                     else:
                         output_pin.value(0)
-                        print("Seuil non dépassé : désactivation.", end="\n\n")
+                        print("Porte fermée. Activation...", end="\n\n")
                 else:
                     print("Données non valides dans le message.")
             except (ValueError, TypeError) as e:
