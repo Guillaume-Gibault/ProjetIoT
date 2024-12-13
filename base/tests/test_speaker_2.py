@@ -1,4 +1,5 @@
-from machine import Pin, PWM
+from pyb import Pin
+from pyb.timer import PWM
 import time
 
 # Configuration de la broche SIG en sortie PWM
