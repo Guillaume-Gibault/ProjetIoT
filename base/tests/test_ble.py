@@ -4,11 +4,26 @@
 # 2 - TEMPERATURE : pour envoyer une mesure de température du périphérique à un central
 
 import bluetooth  # Pour gérer le BLE
-from ble_advertising import adv_payload  # Pour construire et décoder les trames d'advertising
 from struct import pack  # Pour agréger les octets dans la "payload" des caractéristiques
 from micropython import const  # Pour la déclaration de constantes entières
 import pyb  # Pour piloter les LED de la NUCLEO-WB55
 from binascii import hexlify  # Convertit une donnée binaire en sa représentation hexadécimale
+import struct
+
+# Advertising frames are repeated packets with the following structure:
+#   1 byte indicating the size of the data (N + 1)
+#   1 byte indicating the type of data (see constants below)
+#   N bytes of data of the indicated type
+_ADV_TYPE_FLAGS = const(0x01)
+_ADV_TYPE_NAME = const(0x09)
+_ADV_TYPE_UUID16_COMPLETE = const(0x3)
+_ADV_TYPE_UUID32_COMPLETE = const(0x5)
+_ADV_TYPE_UUID128_COMPLETE = const(0x7)
+_ADV_TYPE_UUID16_MORE = const(0x2)
+_ADV_TYPE_UUID32_MORE = const(0x4)
+_ADV_TYPE_UUID128_MORE = const(0x6)
+_ADV_TYPE_APPEARANCE = const(0x19)
+_ADV_TYPE_MANUFACTURER = const(0xFF
 
 # Constantes définies pour/par le protocole Blue-ST
 _IRQ_CENTRAL_CONNECT = const(1)
@@ -55,67 +70,123 @@ led_bleu = pyb.LED(3)
 led_rouge = pyb.LED(1)
 
 
+# Generates a frame which will be passed to the gap_advertise(adv_data=...) method.
+def adv_payload(limited_disc=False, br_edr=False, name=None, services=None, appearance=0, manufacturer=0):
+	payload = bytearray()
+
+	def _append(adv_type, value):
+		nonlocal payload
+		payload += struct.pack('BB', len(value) + 1, adv_type) + value
+
+	_append(_ADV_TYPE_FLAGS, struct.pack('B', (0x01 if limited_disc else 0x02) + (0x00 if br_edr else 0x04)))
+
+	if name:
+		_append(_ADV_TYPE_NAME, name)
+
+	if services:
+		for uuid in services:
+			b = bytes(uuid)
+			if len(b) == 2:
+				_append(_ADV_TYPE_UUID16_COMPLETE, b)
+			elif len(b) == 4:
+				_append(_ADV_TYPE_UUID32_COMPLETE, b)
+			elif len(b) == 16:
+				_append(_ADV_TYPE_UUID128_COMPLETE, b)
+
+	if appearance:
+		# See org.bluetooth.characteristic.gap.appearance.xml
+		_append(_ADV_TYPE_APPEARANCE, struct.pack('<h', appearance))
+
+	if manufacturer:
+		_append(_ADV_TYPE_MANUFACTURER, manufacturer)
+
+	return payload
+
+def decode_field(payload, adv_type):
+	i = 0
+	result = []
+	while i + 1 < len(payload):
+		if payload[i + 1] == adv_type:
+			result.append(payload[i + 2:i + payload[i] + 1])
+		i += 1 + payload[i]
+	return result
+
+def decode_name(payload):
+	n = decode_field(payload, _ADV_TYPE_NAME)
+	return str(n[0], 'utf-8') if n else ''
+
+def decode_services(payload):
+	services = []
+	for u in decode_field(payload, _ADV_TYPE_UUID16_COMPLETE):
+		services.append(bluetooth.UUID(struct.unpack('<h', u)[0]))
+	for u in decode_field(payload, _ADV_TYPE_UUID32_COMPLETE):
+		services.append(bluetooth.UUID(struct.unpack('<d', u)[0]))
+	for u in decode_field(payload, _ADV_TYPE_UUID128_COMPLETE):
+		services.append(bluetooth.UUID(u))
+	return services
+
+
 class BLESensor:
-    # Initialisation, démarrage de GAP et broadcast des trames d'advertising
-    def __init__(self, ble, name='WB55-GFD'):
-        self._ble = ble
-        self._ble.active(True)
-        self._ble.irq(self._irq)
-        ((self._temperature_handle, self._switch_handle),) = self._ble.gatts_register_services((_ST_APP_SERVICE,))
-        self._connections = set()
-        self._payload = adv_payload(name=name, manufacturer=_MANUFACTURER)
-        self._advertise()
-        self._handler = None
+	# Initialisation, démarrage de GAP et broadcast des trames d'advertising
+	def __init__(self, ble, name='WB55-GFD'):
+		self._ble = ble
+		self._ble.active(True)
+		self._ble.irq(self._irq)
+		((self._temperature_handle, self._switch_handle),) = self._ble.gatts_register_services((_ST_APP_SERVICE,))
+		self._connections = set()
+		self._payload = adv_payload(name=name, manufacturer=_MANUFACTURER)
+		self._advertise()
+		self._handler = None
 
-        # Affiche l'adresse MAC de l'objet
-        dummy, byte_mac = self._ble.config('mac')
-        hex_mac = hexlify(byte_mac)
-        print("Adresse MAC : %s" % hex_mac.decode("ascii"))
+		# Affiche l'adresse MAC de l'objet
+		dummy, byte_mac = self._ble.config('mac')
+		hex_mac = hexlify(byte_mac)
+		print("Adresse MAC : %s" % hex_mac.decode("ascii"))
 
-    # Gestion des évènements BLE...
-    def _irq(self, event, data):
+	# Gestion des évènements BLE...
+	def _irq(self, event, data):
 
-        # Si un central a envoyé une demande de connexion
-        if event == _IRQ_CENTRAL_CONNECT:
-            conn_handle, _, _, = data
-            # Se connecte au central (et arrête automatiquement l'advertising)
-            self._connections.add(conn_handle)
-            print("Connecté à un central")
-            led_bleu.on()  # Allume la LED bleue
+		# Si un central a envoyé une demande de connexion
+		if event == _IRQ_CENTRAL_CONNECT:
+			conn_handle, _, _, = data
+			# Se connecte au central (et arrête automatiquement l'advertising)
+			self._connections.add(conn_handle)
+			print("Connecté à un central")
+			led_bleu.on()  # Allume la LED bleue
 
-        # Si le central a envoyé une demande de déconnexion
-        elif event == _IRQ_CENTRAL_DISCONNECT:
-            conn_handle, _, _, = data
-            self._connections.remove(conn_handle)
-            # Redémarre le mode advertising
-            self._advertise()
-            print("Déconnecté du central")
+		# Si le central a envoyé une demande de déconnexion
+		elif event == _IRQ_CENTRAL_DISCONNECT:
+			conn_handle, _, _, = data
+			self._connections.remove(conn_handle)
+			# Redémarre le mode advertising
+			self._advertise()
+			print("Déconnecté du central")
 
-        # Si une écriture est détectée dans la caractéristique SWITCH (interrupteur) de la LED
-        elif event == _IRQ_GATTS_WRITE:
-            conn_handle, value_handle, = data
-            if conn_handle in self._connections and value_handle == self._switch_handle:
-                # Lecture de la valeur de la caractéristique
-                data_received = self._ble.gatts_read(self._switch_handle)
-                self._ble.gatts_write(self._switch_handle, pack('<HB', 1000, data_received[0]))
-                self._ble.gatts_notify(conn_handle, self._switch_handle)
-                # Selon la valeur écrite, on allume ou on éteint la LED rouge
-                if data_received[0] == 1:
-                    led_rouge.on()  # Allume la LED rouge
-                else:
-                    led_rouge.off()  # Eteint la LED rouge
+		# Si une écriture est détectée dans la caractéristique SWITCH (interrupteur) de la LED
+		elif event == _IRQ_GATTS_WRITE:
+			conn_handle, value_handle, = data
+			if conn_handle in self._connections and value_handle == self._switch_handle:
+				# Lecture de la valeur de la caractéristique
+				data_received = self._ble.gatts_read(self._switch_handle)
+				self._ble.gatts_write(self._switch_handle, pack('<HB', 1000, data_received[0]))
+				self._ble.gatts_notify(conn_handle, self._switch_handle)
+				# Selon la valeur écrite, on allume ou on éteint la LED rouge
+				if data_received[0] == 1:
+					led_rouge.on()  # Allume la LED rouge
+				else:
+					led_rouge.off()  # Eteint la LED rouge
 
-    # On écrit la valeur de la température dans la caractéristique "temperature"
-    # def set_data_temperature(self, temperature, notify):
-    #     self._ble.gatts_write(self._temperature_handle, pack('<f', temperature))
-    #     if notify:
-    #         for conn_handle in self._connections:
-    #             # Signale au Central que la valeur de la caractéristique vient d'être
-    #             # rafraichie et qu'elle peut donc être lue.
-    #             self._ble.gatts_notify(conn_handle, self._temperature_handle)
+	# On écrit la valeur de la température dans la caractéristique "temperature"
+	# def set_data_temperature(self, temperature, notify):
+	#     self._ble.gatts_write(self._temperature_handle, pack('<f', temperature))
+	#     if notify:
+	#         for conn_handle in self._connections:
+	#             # Signale au Central que la valeur de la caractéristique vient d'être
+	#             # rafraichie et qu'elle peut donc être lue.
+	#             self._ble.gatts_notify(conn_handle, self._temperature_handle)
 
-    # Pour démarrer l'advertising, avec une fréquence de 5 secondes.
-    # Précise ("connectable=True") qu'un central pourra se connecter au périphérique.
-    def _advertise(self, interval_us=500000):
-        self._ble.gap_advertise(interval_us, adv_data=self._payload, connectable=True)
-        led_bleu.off()  # Eteint la LED bleue
+	# Pour démarrer l'advertising, avec une fréquence de 5 secondes.
+	# Précise ("connectable=True") qu'un central pourra se connecter au périphérique.
+	def _advertise(self, interval_us=500000):
+		self._ble.gap_advertise(interval_us, adv_data=self._payload, connectable=True)
+		led_bleu.off()  # Eteint la LED bleue
