@@ -69,9 +69,14 @@ _MSG_CHAR = (
 	# La caratéristique peut être lue, se notifier et "s'indiquer"
 	_FLAG_READ | _FLAG_NOTIFY | _FLAG_INDICATE,
 )
+_HUMI_CHAR = (
+	bluetooth.UUID(0x2A6F),
+	# La caratéristique peut être lue, se notifier et "s'indiquer"
+	_FLAG_READ | _FLAG_NOTIFY | _FLAG_INDICATE,
+)
 _ENV_SENSE_SERVICE = (
 	_ENV_SENSE_UUID,
-	(_MSG_CHAR,),
+	(_MSG_CHAR,_HUMI_CHAR,),
 )
 _ADV_APPEARANCE_GENERIC_ENVSENSOR = 5696  # Icône associée à un advertiser (GAP) de données environnementales. Voir org.bluetooth.characteristic.gap.appearance.xml
 
@@ -81,7 +86,7 @@ class BLEenvironment:  # Classe pour l'envoi de messages BLE
         self._ble = ble
         self._ble.active(True)
         self._ble.irq(self._irq)
-        ((self._msg_handle,),) = self._ble.gatts_register_services((_ENV_SENSE_SERVICE,))
+        ((self._msg_handle,self._humi_handle,),) = self._ble.gatts_register_services((_ENV_SENSE_SERVICE,))
         self._connections = set()
         self._payload = advertising_payload(
             name=name, services=[_ENV_SENSE_UUID], appearance=_ADV_APPEARANCE_GENERIC_ENVSENSOR
