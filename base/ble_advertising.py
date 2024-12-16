@@ -22,7 +22,7 @@ _ADV_TYPE_MANUFACTURER = const(0xFF)
 
 # Generates a frame which will be passed to the gap_advertise(adv_data=...) method.
 
-def adv_payload(limited_disc=False, br_edr=False, name=None, services=None, appearance=0, manufacturer=0):
+def advertising_payload(limited_disc=False, br_edr=False, name=None, services=None, appearance=0, manufacturer=0):
 	payload = bytearray()
 
 	def _append(adv_type, value):
