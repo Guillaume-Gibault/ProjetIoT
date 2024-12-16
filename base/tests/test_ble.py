@@ -57,7 +57,7 @@ led_rouge = pyb.LED(1)
 
 class BLESensor:
     # Initialisation, démarrage de GAP et broadcast des trames d'advertising
-    def __init__(self, ble, name='WB55-MPY'):
+    def __init__(self, ble, name='WB55-GFD'):
         self._ble = ble
         self._ble.active(True)
         self._ble.irq(self._irq)
