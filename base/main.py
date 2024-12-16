@@ -81,7 +81,7 @@ class BLEenvironment:  # Classe pour l'envoi de messages BLE
         self._ble = ble
         self._ble.active(True)
         self._ble.irq(self._irq)
-        self._msg_handle = self._ble.gatts_register_services((_ENV_SENSE_SERVICE,))
+        ((self._msg_handle,),) = self._ble.gatts_register_services((_ENV_SENSE_SERVICE,))
         self._connections = set()
         self._payload = advertising_payload(
             name=name, services=[_ENV_SENSE_UUID], appearance=_ADV_APPEARANCE_GENERIC_ENVSENSOR
