@@ -4,7 +4,7 @@ import pyb
 import time
 import re
 import bluetooth
-from ble_advertising import advertising_payload
+from ble_advertising import adv_payload
 from binascii import hexlify
 
 # Définition des broches
@@ -88,7 +88,7 @@ class BLEenvironment:  # Classe pour l'envoi de messages BLE
         self._ble.irq(self._irq)
         ((self._msg_handle,self._humi_handle,),) = self._ble.gatts_register_services((_ENV_SENSE_SERVICE,))
         self._connections = set()
-        self._payload = advertising_payload(
+        self._payload = adv_payload(
             name=name, services=[_ENV_SENSE_UUID], appearance=_ADV_APPEARANCE_GENERIC_ENVSENSOR
         )
         self._advertise()
