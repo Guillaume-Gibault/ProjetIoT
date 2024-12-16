@@ -1,5 +1,4 @@
-# Example to generate advertising frames for BLE
-
+# Imports
 from micropython import const
 import struct
 import bluetooth
