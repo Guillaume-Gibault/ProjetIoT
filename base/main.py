@@ -128,8 +128,10 @@ while True:
                 # Placeholder pour l'envoi d'un message d'alerte
                 print("Mauvais code. Continuation de l'alarme...", end="\n\n")
     except KeyboardInterrupt:
+        print("Arrêt du programme.")
         pwm.pulse_width_percent(0)
         tim1.deinit()
         output_pin.value(0)
-        print("Arrêt du programme.")
+        send_command("AT+RESET", expected_response="+RESET: OK")  # Reset LoRa
+        time.sleep(2)  # Pause pour laisser le temps au module de redémarrer
         break
