@@ -2,10 +2,8 @@
 # Définition d'un service _ST_APP_SERVICE avec deux caractéristiques :
 # 1 - SWITCH : pour éteindre et allumer une LED du périphérique depuis un central
 # 2 - TEMPERATURE : pour envoyer une mesure de température du périphérique à un central
-
 import bluetooth  # Pour gérer le BLE
 from struct import pack  # Pour agréger les octets dans la "payload" des caractéristiques
-from micropython import const  # Pour la déclaration de constantes entières
 import pyb  # Pour piloter les LED de la NUCLEO-WB55
 from binascii import hexlify  # Convertit une donnée binaire en sa représentation hexadécimale
 import struct
@@ -14,21 +12,21 @@ import struct
 #   1 byte indicating the size of the data (N + 1)
 #   1 byte indicating the type of data (see constants below)
 #   N bytes of data of the indicated type
-_ADV_TYPE_FLAGS = const(0x01)
-_ADV_TYPE_NAME = const(0x09)
-_ADV_TYPE_UUID16_COMPLETE = const(0x3)
-_ADV_TYPE_UUID32_COMPLETE = const(0x5)
-_ADV_TYPE_UUID128_COMPLETE = const(0x7)
-_ADV_TYPE_UUID16_MORE = const(0x2)
-_ADV_TYPE_UUID32_MORE = const(0x4)
-_ADV_TYPE_UUID128_MORE = const(0x6)
-_ADV_TYPE_APPEARANCE = const(0x19)
-_ADV_TYPE_MANUFACTURER = const(0xFF
+_ADV_TYPE_FLAGS = 0x01
+_ADV_TYPE_NAME = 0x09
+_ADV_TYPE_UUID16_COMPLETE = 0x3
+_ADV_TYPE_UUID32_COMPLETE = 0x5
+_ADV_TYPE_UUID128_COMPLETE = 0x7
+_ADV_TYPE_UUID16_MORE = 0x2
+_ADV_TYPE_UUID32_MORE = 0x4
+_ADV_TYPE_UUID128_MORE = 0x6
+_ADV_TYPE_APPEARANCE = 0x19
+_ADV_TYPE_MANUFACTURER = 0xFF
 
 # Constantes définies pour/par le protocole Blue-ST
-_IRQ_CENTRAL_CONNECT = const(1)
-_IRQ_CENTRAL_DISCONNECT = const(2)
-_IRQ_GATTS_WRITE = const(3)
+_IRQ_CENTRAL_CONNECT = 1
+_IRQ_CENTRAL_DISCONNECT = 2
+_IRQ_GATTS_WRITE = 3
 
 # Pour les UUID et les codes, on se réfère à la documentation du SDK Blue-ST disponible ici :
 # https://www.st.com/resource/en/user_manual/dm00550659-getting-started-with-the-bluest-protocol-and-sdk-stmicroelectronics.pdf.
@@ -48,10 +46,10 @@ _SWITCH_UUID = (bluetooth.UUID('20000000-0001-11E1-AC36-0002A5D5C51B'), bluetoot
 _ST_APP_SERVICE = (_ST_APP_UUID, (_TEMPERATURE_UUID, _SWITCH_UUID))
 
 # 2 - Construction de la trame (contenu du message) d'avertising GAP :
-_PROTOCOL_VERSION = const(0x01)  # Version du protocole
-_DEVICE_ID = const(0x80)  # Carte Nucleo générique
+_PROTOCOL_VERSION = 0x01  # Version du protocole
+_DEVICE_ID = 0x80  # Carte Nucleo générique
 _DEVICE_MAC = [0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC]  # Adresse matérielle MAC fictive
-_FEATURE_MASK = const(0x20040000)  # Services sélectionnés : température (2^18) et interrupteur LED (2^29)
+_FEATURE_MASK = 0x20040000  # Services sélectionnés : température (2^18) et interrupteur LED (2^29)
 
 # Explication du calcul du masque déterminant les caractéristiques du service actif (_FEATURE_MASK)
 # A chaque caractéristique est associé un code binaire. On doit simplement sommer les codes de toutes les caractéristiques
