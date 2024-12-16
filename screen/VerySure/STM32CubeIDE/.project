@@ -664,9 +664,19 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_buttonOk.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/image_buttonOkClikced.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_buttonOkClikced.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/image_buttonSuppr.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_buttonSuppr.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_buttonSupprClicked.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_buttonSupprClicked.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/image_download.cpp</name>

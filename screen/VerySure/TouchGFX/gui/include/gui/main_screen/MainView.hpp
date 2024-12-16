@@ -13,6 +13,9 @@ public:
     virtual void tearDownScreen();
 
     //Fonction des boutons
+    virtual void buttonClicked_Ok();
+    virtual void buttonClicked_Suppr();
+
     virtual void buttonClicked_A();
     virtual void buttonClicked_Z();
     virtual void buttonClicked_E();
@@ -41,9 +44,14 @@ public:
     virtual void buttonClicked_N();
 
 protected:
-    // Buffer pour le texte du mot de passe
+    // Longueur maximale du mot de passe
     static constexpr uint8_t MAX_PASSWORD_LENGTH = 20;
-    char passwordBuffer[MAX_PASSWORD_LENGTH + 1] = "";
+
+    // Buffers pour gérer le texte du mot de passe et les messages
+    char passwordBuffer[MAX_PASSWORD_LENGTH + 1]= "";   // Buffer pour stocker le mot de passe saisi
+    touchgfx::Unicode::UnicodeChar passwordTextBuffer[MAX_PASSWORD_LENGTH + 1]; // Buffer Unicode pour l'affichage
+    touchgfx::Unicode::UnicodeChar successTextBuffer[MAX_PASSWORD_LENGTH + 1];  // Texte de succès
+    touchgfx::Unicode::UnicodeChar failureTextBuffer[MAX_PASSWORD_LENGTH + 1];  // Texte d'échec
     uint8_t passwordLength = 0;
 
         // Fonction utilitaire pour ajouter un caractère

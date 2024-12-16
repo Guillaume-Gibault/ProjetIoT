@@ -18,10 +18,10 @@ MainViewBase::MainViewBase() :
     passwordBar.setBitmap(touchgfx::Bitmap(BITMAP_PASSWORD_BAR_ID));
     passwordBox.add(passwordBar);
 
-    passwordText.setPosition(163, 78, 154, 30);
+    passwordText.setPosition(105, 78, 308, 27);
     passwordText.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     passwordText.setLinespacing(0);
-    Unicode::snprintf(passwordTextBuffer, PASSWORDTEXT_SIZE, "%s", touchgfx::TypedText(T_PASSWORDBUFFER).getText());
+    Unicode::snprintf(passwordTextBuffer, PASSWORDTEXT_SIZE, "%s", touchgfx::TypedText(T_PASSWORDTEXTBUFFER).getText());
     passwordText.setWildcard(passwordTextBuffer);
     passwordText.setTypedText(touchgfx::TypedText(T___SINGLEUSE_TTIZ));
     passwordBox.add(passwordText);
@@ -60,12 +60,12 @@ MainViewBase::MainViewBase() :
     keypadButtons.add(letterW);
 
     butttonSuppr.setXY(11, 86);
-    butttonSuppr.setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONSUPPR_ID), touchgfx::Bitmap(BITMAP_BUTTONSUPPR_ID));
+    butttonSuppr.setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONSUPPR_ID), touchgfx::Bitmap(BITMAP_BUTTONSUPPRCLICKED_ID));
     butttonSuppr.setAction(buttonCallback);
     keypadButtons.add(butttonSuppr);
 
     buttonOk.setXY(398, 86);
-    buttonOk.setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONOK_ID), touchgfx::Bitmap(BITMAP_BUTTONOK_ID));
+    buttonOk.setBitmaps(touchgfx::Bitmap(BITMAP_BUTTONOK_ID), touchgfx::Bitmap(BITMAP_BUTTONOKCLIKCED_ID));
     buttonOk.setAction(buttonCallback);
     keypadButtons.add(buttonOk);
 
@@ -330,12 +330,11 @@ MainViewBase::MainViewBase() :
 
     add(keypadLetters);
 
-    feedbackText.setXY(146, 14);
+    feedbackText.setPosition(90, 18, 300, 24);
     feedbackText.setColor(touchgfx::Color::getColorFromRGB(255, 0, 0));
     feedbackText.setLinespacing(0);
-    feedbackTextBuffer[0] = 0;
+    Unicode::snprintf(feedbackTextBuffer, FEEDBACKTEXT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_O4S5).getText());
     feedbackText.setWildcard(feedbackTextBuffer);
-    feedbackText.resizeToCurrentText();
     feedbackText.setTypedText(touchgfx::TypedText(T___SINGLEUSE_24O2));
     add(feedbackText);
 }
