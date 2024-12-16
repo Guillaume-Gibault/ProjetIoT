@@ -128,5 +128,8 @@ while True:
                 # Placeholder pour l'envoi d'un message d'alerte
                 print("Mauvais code. Continuation de l'alarme...", end="\n\n")
     except KeyboardInterrupt:
+        pwm.pulse_width_percent(0)
+        tim1.deinit()
+        output_pin.value(0)
         print("Arrêt du programme.")
         break
