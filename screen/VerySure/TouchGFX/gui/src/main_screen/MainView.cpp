@@ -1,6 +1,11 @@
 #include <gui/main_screen/MainView.hpp>
 #include <cstring>
 
+extern "C" {
+    #include "stm32f7xx_hal.h" // Inclus les fonctions HAL en C pour GPIO
+}
+
+
 
 MainView::MainView() : passwordLength(0) {
     memset(passwordBuffer, 0, sizeof(passwordBuffer));
@@ -17,6 +22,19 @@ void MainView::setupScreen() {
 void MainView::tearDownScreen()
 {
     MainViewBase::tearDownScreen();
+}
+
+volatile uint8_t pinF9_State = 0;
+volatile uint8_t pinF8_State = 0;
+
+// Fonction pour lire l'état de PA2
+void updatePinF9State(void) {
+    pinF9_State = HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_9);
+}
+
+// Fonction pour lire l'état de PA3
+void updatePinF8State(void) {
+    pinF8_State = HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_8);
 }
 
 //Fonction permettant d'ajouter à la chaine de caracteres
@@ -56,17 +74,24 @@ void MainView::removeLastCharacter() {
 
 
 void MainView::validatePassword() {
-//    printf("Validating password: %s\n", passwordBuffer); // Débogage
     const char* correctPassword = "GUIFERDES"; // Mot de passe correct
+
     if (strcmp(passwordBuffer, correctPassword) == 0) {
-//        printf("Password correct\n"); // Débogage
-        feedbackText.setWildcard(successTextBuffer); // Mettre un texte de succès
+        feedbackText.setWildcard(successTextBuffer); // Message de succès
+        HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_SET);   // PIN_A à 1
+        HAL_GPIO_WritePin(GPIOF, GPIO_PIN_8, GPIO_PIN_RESET); // PIN_B à 0
+        updatePinF9State();
+        updatePinF8State();
     } else {
-//        printf("Password incorrect\n"); // Débogage
-        feedbackText.setWildcard(failureTextBuffer); // Mettre un texte d'échec
+        feedbackText.setWildcard(failureTextBuffer); // Message d'échec
+        HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_RESET); // PIN_A à 0
+        HAL_GPIO_WritePin(GPIOF, GPIO_PIN_8, GPIO_PIN_SET);   // PIN_B à 1
+        updatePinF9State();
+        updatePinF8State();
     }
-    feedbackText.invalidate(); // Rafraîchit l'affichage du message
+    feedbackText.invalidate(); // Rafraîchir l'affichage
 }
+
 
 
 

@@ -20,6 +20,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "app_touchgfx.h"
+#include "stm32f7xx_hal.h" // HAL STM32
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -81,10 +82,26 @@ void MX_TouchGFX_Process(void)
 /**
  * TouchGFX application thread
  */
-void TouchGFX_Task(void* argument)
-{
-    // Calling forward to touchgfx_taskEntry in C++ domain
-    touchgfx_taskEntry();
+// Déclaration de la fonction TouchGFX pour un fichier C
+extern void touchgfx_taskEntry(void);
+
+// Variable pour contrôler la mise en veille
+volatile uint8_t goToSleep = 1;
+
+void TouchGFX_Task(void *argument) {
+    for (;;) {
+        if (goToSleep) {
+            // Suspendre l'exécution de TouchGFX et mettre en veille
+            HAL_SuspendTick(); // Désactiver SysTick pour économiser l'énergie
+            HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);
+            HAL_ResumeTick(); // Réactiver SysTick après le réveil
+
+            goToSleep = 0; // Réinitialiser l'état après le réveil
+        }
+
+        // Appel normal de la boucle TouchGFX
+        touchgfx_taskEntry();
+    }
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

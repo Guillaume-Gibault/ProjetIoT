@@ -37,7 +37,7 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-
+void enterSleepMode(void);
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/

@@ -677,6 +677,23 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(MCU_ACTIVE_GPIO_Port, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
+  // Configurer PF9 comme sortie
+  GPIO_InitStruct.Pin = GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
+
+  // Configurer PF8 comme sortie
+  GPIO_InitStruct.Pin = GPIO_PIN_8;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
+
+  // Mettre les deux pins à 0 par défaut
+  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOF, GPIO_PIN_8, GPIO_PIN_RESET);
 /* USER CODE END MX_GPIO_Init_2 */
 }
 
@@ -742,6 +759,39 @@ void EnableMemoryMappedMode(uint8_t manufacturer_id)
     Error_Handler();
   }
 }
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+    if (GPIO_Pin == GPIO_PIN_1) { // Vérifie si l'interruption provient de PA1
+        printf("Réveil de la STM32F746 via PA1\n");
+
+        // Logique spécifique : démarrer l'interface graphique ou effectuer une autre action
+        MX_TouchGFX_Init();
+    }
+}
+
+void enterSleepMode(void) {
+    printf("STM32F746 entre en mode veille, en attente du signal GPIO\n");
+
+    // Désactiver les périphériques inutiles pour économiser l'énergie
+    HAL_SuspendTick(); // Désactiver SysTick pour réduire la consommation
+
+    // Entrer en mode veille
+    HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);
+
+    // Après réveil
+    HAL_ResumeTick(); // Réactiver SysTick après le réveil
+    printf("STM32F746 réveillée par GPIO\n");
+}
+
+extern volatile uint8_t goToSleep;
+
+// Simule une commande externe ou un événement pour entrer en veille
+void triggerSleepMode(void) {
+    printf("Demande d'entrée en mode veille...\n");
+    goToSleep = 1; // Indique à TouchGFX_Task d'entrer en veille
+}
+
+
 
 /* USER CODE END 4 */
 

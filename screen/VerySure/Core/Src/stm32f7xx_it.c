@@ -27,6 +27,9 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
+void EXTI1_IRQHandler(void) {
+    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1); // Appelle la fonction de callback
+}
 
 /* USER CODE END TD */
 
