@@ -4,37 +4,10 @@ import pyb
 import time
 import re
 
-# Définition des broches
-A0 = Pin.cpu.C0
-A1 = Pin.cpu.C1
-A2 = Pin.cpu.A1
-A3 = Pin.cpu.A0
-A4 = Pin.cpu.A4
-A5 = Pin.cpu.A5
-D0 = Pin.cpu.A3
-D1 = Pin.cpu.A2
-D2 = Pin.cpu.C6
-D3 = Pin.cpu.A10
-D4 = Pin.cpu.C10
-D5 = Pin.cpu.A15
-D6 = Pin.cpu.A8
-D7 = Pin.cpu.C13
-D8 = Pin.cpu.C12
-D9 = Pin.cpu.A9
-D10 = Pin.cpu.A4
-D11 = Pin.cpu.A7
-D12 = Pin.cpu.A6
-D13 = Pin.cpu.A5
-D14 = Pin.cpu.B9
-D15 = Pin.cpu.B8
-
 # D6 génère une PWM avec TIM1, CH1 pour le buzzer/speaker
 d6 = pyb.Pin('D6', pyb.Pin.OUT_PP)
 tim1 = pyb.Timer(1, freq=262)
 pwm = tim1.channel(1, pyb.Timer.PWM, pin=d6)
-pwm.pulse_width_percent(10)
-time.sleep(5)
-pwm.pulse_width_percent(0)
 
 # Constantes pour l'UART
 DELAY_TIMEOUT = 1000
@@ -106,7 +79,7 @@ while True:
                         data = match.group(1)
                         activation = bool(int(data))
                         if activation:
-                            #pwm.pulse_width_percent(15)
+                            #pwm.pulse_width_percent(15)  # Prod
                             output_pin.value(1)
                             triggered = True
                             print("Porte ouverte. Activation...", end="\n\n")
@@ -119,7 +92,7 @@ while True:
                 except (ValueError, TypeError) as e:
                     print("Erreur dans le traitement :", e)
         else:
-            print("Valide state : ",input_pin_valid_code.value(), "Invalid state : ", input_pin_invalid_code.value(), "Input ecran : ",output_pin.value())
+            print("Valide state : ",input_pin_valid_code.value(), "Invalid state : ", input_pin_invalid_code.value(), "Input ecran : ",output_pin.value())  # Prod
             if input_pin_valid_code.value() == 1 and input_pin_invalid_code.value() == 0:  # Handler pour la désactivation de l'alarme
                 pwm.pulse_width_percent(0)
                 output_pin.value(0)
