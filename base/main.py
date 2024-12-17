@@ -79,7 +79,7 @@ while True:
                         data = match.group(1)
                         activation = bool(int(data))
                         if activation:
-                            #pwm.pulse_width_percent(15)  # Prod
+                            pwm.pulse_width_percent(15)
                             output_pin.value(1)
                             triggered = True
                             print("Porte ouverte. Activation...", end="\n\n")
@@ -91,8 +91,7 @@ while True:
                         print("Données non valides dans le message.")
                 except (ValueError, TypeError) as e:
                     print("Erreur dans le traitement :", e)
-        else:
-            print("Valide state : ",input_pin_valid_code.value(), "Invalid state : ", input_pin_invalid_code.value(), "Input ecran : ",output_pin.value())  # Prod
+        else:  # Handler pour la désactivation de l'alarme
             if input_pin_valid_code.value() == 1 and input_pin_invalid_code.value() == 0:  # Handler pour la désactivation de l'alarme
                 pwm.pulse_width_percent(0)
                 output_pin.value(0)
