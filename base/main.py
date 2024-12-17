@@ -32,6 +32,8 @@ D15 = Pin.cpu.B8
 d6 = pyb.Pin('D6', pyb.Pin.OUT_PP)
 tim1 = pyb.Timer(1, freq=262)
 pwm = tim1.channel(1, pyb.Timer.PWM, pin=d6)
+pwm.pulse_width_percent(10)
+time.sleep(5)
 pwm.pulse_width_percent(0)
 
 # Constantes pour l'UART
@@ -42,14 +44,14 @@ RX_BUFF = 512
 EOL = "\r\n"
 
 # Pin de sortie pour signalisation
-output_pin = Pin(D0, Pin.OUT)
+output_pin = Pin('A5', Pin.OUT)
 output_pin.value(0)
 
 # Pin d'entrée pour la validité du code de désactivation
-input_pin_valid_code = Pin(D1, Pin.IN)
+input_pin_valid_code = Pin('A4', Pin.IN)
 
 # Pin d'entrée pour la non-validité du code de désactivation
-input_pin_invalid_code = Pin(D2, Pin.IN)
+input_pin_invalid_code = Pin('A3', Pin.IN)
 
 # Configuration de l'UART pour LoRa
 uart = UART(UART_NUMBER, baudrate=BAUDRATE, timeout=DELAY_TIMEOUT, rxbuf=RX_BUFF)
@@ -104,7 +106,7 @@ while True:
                         data = match.group(1)
                         activation = bool(int(data))
                         if activation:
-                            pwm.pulse_width_percent(15)
+                            #pwm.pulse_width_percent(15)
                             output_pin.value(1)
                             triggered = True
                             print("Porte ouverte. Activation...", end="\n\n")
@@ -117,12 +119,13 @@ while True:
                 except (ValueError, TypeError) as e:
                     print("Erreur dans le traitement :", e)
         else:
-            if input_pin_valid_code.value() == 1:  # Handler pour la désactivation de l'alarme
+            print("Valide state : ",input_pin_valid_code.value(), "Invalid state : ", input_pin_invalid_code.value(), "Input ecran : ",output_pin.value())
+            if input_pin_valid_code.value() == 1 and input_pin_invalid_code.value() == 0:  # Handler pour la désactivation de l'alarme
                 pwm.pulse_width_percent(0)
                 output_pin.value(0)
                 triggered = False
                 print("Bon code. Désactivation...", end="\n\n")
-            if input_pin_invalid_code.value() == 1:  # Handler pour la non-désactivation de l'alarme
+            elif input_pin_invalid_code.value() == 1 and input_pin_valid_code.value() == 0:  # Handler pour la non-désactivation de l'alarme
                 pwm.pulse_width_percent(15)
                 output_pin.value(1)
                 # Placeholder pour l'envoi d'un message d'alerte
